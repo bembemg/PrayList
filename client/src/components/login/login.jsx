@@ -19,8 +19,13 @@ function Login() {
     }
 
     return (
-        <div>
+        <div className='login-page'>
             <form onSubmit={handleSubmit}>
+                <aside>
+                    <h1>Bem-vindo ao PrayList</h1>
+                    <p>"Orai sem cessar"</p>
+                    <i>1 Tessalonicenses 5:17</i>
+                </aside>
                 <fieldset>
                 <h1>Login</h1>
                 <p>Usuário</p>
@@ -38,9 +43,9 @@ function Login() {
                     onChange={(event) => setPassword(event.target.value)}
                 />
                 <button type="submit">Entrar</button>
-                </fieldset>
-                <p>Ainda não tem uma conta?</p>
+                <span>Não possui uma conta?</span>
                 <a href="/register">Registre-se</a>
+                </fieldset>
             </form>
         </div>
     );

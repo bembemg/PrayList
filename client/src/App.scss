@@ -4,6 +4,56 @@
     padding: 0;
     margin: 0;
     box-sizing: border-box;
+}
 
-    font-family: 'Montserrat', sans-serif;
+:root {
+    --bg-color: #F1F0E8;
+    --fieldset-color: #BCCCDC;
+    --aside-color: #D9EAFD;
+    --text-color: #18181d;
+    
+    --font-family: 'Montserrat', sans-serif;
+    --text-title: 800 2.25vw/2rem var(--font-family);
+    --text-lg: 600 1.75vw/1.5rem var(--font-family);
+    --text-md: 400 1.5vw/1.5rem var(--font-family);
+    --text-sm: 400 1vw/1.5rem var(--font-family);
+}
+
+html {
+    font-size: 16px;
+}
+
+body {
+    background-color: var(--bg-color);
+}
+
+form {
+    display: flex;
+    justify-content: center;
+
+    margin-top: 15vh;
+    height: 70vh;
+
+    gap: 2rem;
+
+    fieldset {
+        border: none;
+        background-color: var(--fieldset-color);
+        padding: 6rem 2rem;
+        border-radius: 12px;
+        align-items: center;
+
+        width: 25vw;
+    }
+
+    aside {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        border-radius: 12px;
+
+        width: 35vw;
+        // background-color: var(--aside-color);
+        background-color: var(--fieldset-color);
+    }
 }

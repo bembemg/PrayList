@@ -29,6 +29,11 @@ function Register() {
     return (
         <div>
             <form onSubmit={handleSubmit}>
+                <aside>
+                    <h1>Registre-se, é grátis!</h1>
+                    <p>"Orai sem cessar"</p>
+                    <i>1 Tessalonicenses 5:17</i>
+                </aside>
                 <fieldset>
                     <h1>Registre-se</h1>
                     <p>Email</p>
@@ -60,10 +65,10 @@ function Register() {
                         onChange={event => setConfirmPassword(event.target.value)}
                     />
                     <button type="submit">Registrar</button>
+                    <span>Já tem uma conta?</span>
+                    <a href="/">Faça Login</a>
                 </fieldset>
             </form>
-            <p>Já tem uma conta?</p>
-            <a href="/">Faça Login</a>
         </div>
     );
 };

@@ -1,0 +1,157 @@
+.container {
+    max-width: 80rem;
+    height: 75vh;
+    margin-inline: auto;
+    margin-top: 15vh;
+    background-color: red;
+
+    header {
+        display: flex;
+        justify-self: center;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 1.5rem;
+        background-color: blue;
+
+        width: 45vw;
+        height: 8vh;
+
+        font: var(--text-lg);
+        color: var(--text-color);
+    }
+
+    main {
+        display: flex;
+        justify-self: center;
+        // justify-content: center;
+        background-color: green;
+        padding-top: 1.5rem;
+        // align-items: center;
+
+        width: 45vw;
+        height: 55vh;
+
+        ul {
+            list-style: none;
+            
+            li {
+                display: flex;
+                background-color: purple;
+                width: 45vw;
+                height: 3.5rem;
+                margin-block: 1rem;
+                align-items: center;
+
+                .pray {
+                    // align-self: center;
+                    // text-align: center;
+                    font: var(--text-md);
+                    color: var(--text-color);
+                }
+                
+                .checkbox {
+                    margin-inline: 1rem 1rem;
+                    size: 2rem;
+
+                    input {
+                        display: none;
+                    }
+                }
+
+                .buttons {
+                    display: flex;
+                    gap: 1rem;
+                    margin-inline: auto 1rem;
+                }
+            }
+        }
+
+    }
+
+    .include {
+        width: 45vw;
+        justify-self: center;
+        
+        button {
+            display: flex;
+            font: var(--text-sm);
+            color: var(--text-color);
+            background-color: var(--aside-color);
+
+            width: 6rem;
+            height: 3rem;
+            margin-block: 1rem;
+            margin-left: auto;
+
+            align-items: center;
+            justify-content: center;
+            
+            cursor: pointer;
+            border: none;
+            border-radius: 12px;
+        }
+
+        dialog {
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+
+            width: 25vw;
+            height: 50vh;
+
+            .dialog-header {
+                display: flex;
+                justify-content: center;
+                
+                #cancel-btn {
+                    position: absolute;
+                    left: 0;
+                    margin: .75rem;
+                }
+    
+                h1 {
+                    font: var(--text-md);
+                    place-self: center;
+                    margin-top: 1rem;
+                }
+            }
+
+            .input-pray {
+                margin: 3rem .75rem;
+
+                p {
+                    font: var(--text-md);
+                    color: var(--text-color);
+                }
+                input {
+                    width: 100%;
+                    height: 4rem;
+                    font: var(--text-sm);
+                    color: var(--text-color);
+
+                    margin-top: .75rem;
+                    padding-inline: .5rem;
+
+                    border-radius: 12px;
+                    border: var(--text-color) 1px solid;
+                }
+            }
+
+            #add {
+                position: absolute;
+                width: calc(100% - 1.5rem);
+                margin-inline: .75rem;
+                height: 5rem;
+
+                bottom: 0;
+            }
+        }
+    }
+
+    a {
+        display: flex;
+        font: var(--text-md);
+        color: var(--text-color);
+        // justify-content: center;
+    }
+}

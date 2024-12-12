@@ -1,4 +1,56 @@
-form {
-  display: flex;
-  justify-content: center;
+.login-page form aside h1 {
+  margin-block: 15rem 5rem;
+  font: var(--text-title);
+  color: var(--text-color);
+}
+.login-page form aside p {
+  font: var(--text-lg);
+  color: var(--text-color);
+}
+.login-page form aside i {
+  font: var(--text-sm);
+  font-style: italic;
+  color: var(--text-color);
+  margin-top: 0.75rem;
+}
+.login-page form fieldset h1 {
+  font: var(--text-title);
+  color: var(--text-color);
+  margin-block: 2rem 1rem;
+}
+.login-page form fieldset p {
+  font: var(--text-lg);
+  color: var(--text-color);
+}
+.login-page form fieldset input {
+  font: var(--text-sm);
+  color: var(--text-color);
+  width: 70%;
+  height: 2.5rem;
+  margin-block: 0.5rem 1.5rem;
+  padding: 1rem;
+  border: 1px solid rgba(59, 59, 59, 0.5607843137);
+  border-radius: 0px 4px 4px 12px;
+  background-color: var(--bg-color);
+}
+.login-page form fieldset button {
+  display: block;
+  width: 70%;
+  height: 3rem;
+  margin-bottom: 1.5rem;
+  cursor: pointer;
+  border: none;
+  border-radius: 12px;
+  background-color: var(--aside-color);
+  color: var(--text-color);
+  font: var(--text-sm);
+}
+.login-page form fieldset span {
+  font: var(--text-sm);
+  color: var(--text-color);
+  margin-right: 0.5rem;
+}
+.login-page form fieldset a {
+  font: var(--text-sm);
+  color: #1f4c79;
 }/*# sourceMappingURL=login.css.map */

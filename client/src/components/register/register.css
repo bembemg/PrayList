@@ -1,1 +1,55 @@
-/*# sourceMappingURL=register.css.map */
+form aside h1 {
+  margin-block: 15rem 5rem;
+  font: var(--text-title);
+  color: var(--text-color);
+}
+form aside p {
+  font: var(--text-lg);
+  color: var(--text-color);
+}
+form aside i {
+  font: var(--text-sm);
+  font-style: italic;
+  color: var(--text-color);
+  margin-top: 0.75rem;
+}
+form fieldset h1 {
+  font: var(--text-title);
+  color: var(--text-color);
+  margin-bottom: 1rem;
+}
+form fieldset p {
+  font: var(--text-sm);
+  color: var(--text-color);
+}
+form fieldset input {
+  font: var(--text-sm);
+  color: var(--text-color);
+  width: 70%;
+  height: 2.5rem;
+  margin-block: 0.25rem 1rem;
+  padding: 1rem;
+  border: 1px solid rgba(59, 59, 59, 0.5607843137);
+  border-radius: 0px 4px 4px 12px;
+  background-color: var(--bg-color);
+}
+form fieldset button {
+  display: block;
+  width: 70%;
+  height: 3rem;
+  margin-bottom: 1.5rem;
+  cursor: pointer;
+  border: none;
+  border-radius: 12px;
+  background-color: var(--aside-color);
+  color: var(--text-color);
+}
+form fieldset span {
+  font: var(--text-sm);
+  color: var(--text-color);
+  margin-right: 0.5rem;
+}
+form fieldset a {
+  font: var(--text-sm);
+  color: #1f4c79;
+}/*# sourceMappingURL=register.css.map */

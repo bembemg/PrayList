@@ -1,0 +1,123 @@
+.container {
+  max-width: 80rem;
+  height: 75vh;
+  margin-inline: auto;
+  margin-top: 15vh;
+  background-color: red;
+}
+.container header {
+  display: flex;
+  justify-self: center;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  background-color: blue;
+  width: 45vw;
+  height: 8vh;
+  font: var(--text-lg);
+  color: var(--text-color);
+}
+.container main {
+  display: flex;
+  justify-self: center;
+  background-color: green;
+  padding-top: 1.5rem;
+  width: 45vw;
+  height: 55vh;
+}
+.container main ul {
+  list-style: none;
+}
+.container main ul li {
+  display: flex;
+  background-color: purple;
+  width: 45vw;
+  height: 3.5rem;
+  margin-block: 1rem;
+  align-items: center;
+}
+.container main ul li .pray {
+  font: var(--text-md);
+  color: var(--text-color);
+}
+.container main ul li .checkbox {
+  margin-inline: 1rem 1rem;
+  size: 2rem;
+}
+.container main ul li .checkbox input {
+  display: none;
+}
+.container main ul li .buttons {
+  display: flex;
+  gap: 1rem;
+  margin-inline: auto 1rem;
+}
+.container .include {
+  width: 45vw;
+  justify-self: center;
+}
+.container .include button {
+  display: flex;
+  font: var(--text-sm);
+  color: var(--text-color);
+  background-color: var(--aside-color);
+  width: 6rem;
+  height: 3rem;
+  margin-block: 1rem;
+  margin-left: auto;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border: none;
+  border-radius: 12px;
+}
+.container .include dialog {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 25vw;
+  height: 50vh;
+}
+.container .include dialog .dialog-header {
+  display: flex;
+  justify-content: center;
+}
+.container .include dialog .dialog-header #cancel-btn {
+  position: absolute;
+  left: 0;
+  margin: 0.75rem;
+}
+.container .include dialog .dialog-header h1 {
+  font: var(--text-md);
+  place-self: center;
+  margin-top: 1rem;
+}
+.container .include dialog .input-pray {
+  margin: 3rem 0.75rem;
+}
+.container .include dialog .input-pray p {
+  font: var(--text-md);
+  color: var(--text-color);
+}
+.container .include dialog .input-pray input {
+  width: 100%;
+  height: 4rem;
+  font: var(--text-sm);
+  color: var(--text-color);
+  margin-top: 0.75rem;
+  padding-inline: 0.5rem;
+  border-radius: 12px;
+  border: var(--text-color) 1px solid;
+}
+.container .include dialog #add {
+  position: absolute;
+  width: calc(100% - 1.5rem);
+  margin-inline: 0.75rem;
+  height: 5rem;
+  bottom: 0;
+}
+.container a {
+  display: flex;
+  font: var(--text-md);
+  color: var(--text-color);
+}/*# sourceMappingURL=list.css.map */
