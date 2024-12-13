@@ -1,26 +1,49 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './login.css'
+import api from '../../services/api.js';
 
 function Login() {
-    const [user, setUser] = useState('');
-    const [password, setPassword] = useState('');
+    const [loginUser, setLoginUser] = useState('');
+    const [loginPassword, setLoginPassword] = useState('');
     const navigate = useNavigate();
 
-    const handleSubmit = (event) => {
+    const login = async (event) => {
         event.preventDefault();
 
-        if (user === 'adm' && password === '123'){
-            localStorage.setItem('auth', true);
-            navigate('/list');
-        } else {
-            alert('Usuário ou senha inválidos');
+
+        if (!loginUser || !loginPassword) {
+            alert('Por favor, preencha todos os campos');
+            return;
+        }
+
+        try {
+            const response = await api.post('/login', {
+                LoginUserName: loginUser,
+                LoginPassword: loginPassword,
+            });
+
+
+            if (response.data.token) {
+                localStorage.setItem('token', response.data.token);
+                sessionStorage.setItem('auth', 'true');
+
+                setTimeout(() => {
+                    navigate('/list', { replace: true });
+                }, 100);
+            }
+        } catch (error) {
+            if (error.response?.status === 401) {
+                alert('Usuário ou senha inválidos');
+            } else {
+                alert('Erro ao fazer login. Tente novamente.');
+            }
         }
     }
 
     return (
         <div className='login-page'>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={login}>
                 <aside>
                     <h1>Bem-vindo ao PrayList</h1>
                     <p>"Orai sem cessar"</p>
@@ -31,16 +54,16 @@ function Login() {
                 <p>Usuário</p>
                 <input 
                     type="user" 
-                    value={user} 
+                    value={loginUser} 
                     placeholder="Usuário" 
-                    onChange={(event) => setUser(event.target.value)}
+                    onChange={(event) => setLoginUser(event.target.value)}
                 />
                 <p>Senha</p>
                 <input 
                     type="password" 
-                    value={password}
+                    value={loginPassword}
                     placeholder="Senha" 
-                    onChange={(event) => setPassword(event.target.value)}
+                    onChange={(event) => setLoginPassword(event.target.value)}
                 />
                 <button type="submit">Entrar</button>
                 <span>Não possui uma conta?</span>

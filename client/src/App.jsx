@@ -1,4 +1,5 @@
 import './App.css'
+import PrivateRoute from './components/PrivateRoute'
 import List from './components/list/list.jsx'
 import Login from './components/login/login.jsx'
 import Register from './components/register/register.jsx'
@@ -8,17 +9,21 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <div><Login /></div>
+    element: <Login />
   },
   {
     path: '/register',
-    element: <div><Register /></div>
+    element: <Register />
   },
   {
     path: '/list',
-    element: <div><List /></div>
+    element: (
+    <PrivateRoute>
+      <List />
+    </PrivateRoute>
+    )
   }
-])
+]);
 
 function App() {
 

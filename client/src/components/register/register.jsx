@@ -1,27 +1,47 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './register.css'
+import api from '../../services/api.js';
 
 function Register() {
     const [email, setEmail] = useState('');
     const [user, setUser] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
+    const [error, setError] = useState('');
+
+    const createUser = async () => {
+        try {
+            api.post('/register', {
+                Email: email,
+                UserName: user,
+                Password: password,
+            })
+        } catch (err) {
+            if (err.response && err.response.data && err.response.data.error) {
+                setError(err.response.data.error);
+            } else {
+                setError('Erro ao criar usuário. Tente novamente.');
+            }
+        }
+    }
+
     const navigate  = useNavigate();
 
     const handleSubmit = (event) => {
         event.preventDefault();
+        setError('');
 
         if (password !== confirmPassword) {
-            alert('As senhas não conferem');
+            setError('As senhas não conferem');
             return;
         }
 
         if (email && user && password && confirmPassword) {
-            alert('Cadastro realizado com sucesso!');
-            navigate('/login');
+            createUser();
+            // navigate('/');
         } else {
-            alert('Preencha todos os campos');
+            setError('Preencha todos os campos');
         }
 
     }
@@ -36,6 +56,7 @@ function Register() {
                 </aside>
                 <fieldset>
                     <h1>Registre-se</h1>
+                    {error && <p className='error'>{error}</p>}
                     <p>Email</p>
                     <input 
                         type="email" 
@@ -64,7 +85,7 @@ function Register() {
                         placeholder="Confirmar Senha"
                         onChange={event => setConfirmPassword(event.target.value)}
                     />
-                    <button type="submit">Registrar</button>
+                    <button type="submit" onClick={createUser}>Registrar</button>
                     <span>Já tem uma conta?</span>
                     <a href="/">Faça Login</a>
                 </fieldset>

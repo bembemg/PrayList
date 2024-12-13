@@ -26,10 +26,16 @@ function List() {
         }
     }, [])
 
+    const handleLogout = () => {
+        localStorage.removeItem('token');
+        sessionStorage.removeItem('auth');
+        navigate('/');
+    }
+
     useEffect(() => {
-        const auth = localStorage.getItem('auth')
-        if (!auth) {
-            navigate('/login')
+        const token = localStorage.getItem('token');
+        if (!token) {
+            navigate('/');
         }
     }, [navigate]);
 
@@ -131,7 +137,7 @@ function List() {
                 </button>
             </dialog>
         </section>
-            <a href="/">Logout</a>
+            <button onClick={handleLogout}>Logout</button>
         </section>
     </div>
     );
