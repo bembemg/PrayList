@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './login.css'
-import api from '../../services/api.js';
+import { mainAPI } from '../../services/api.js';
 
 function Login() {
     const [loginUser, setLoginUser] = useState('');
@@ -18,7 +18,7 @@ function Login() {
         }
 
         try {
-            const response = await api.post('/login', {
+            const response = await mainAPI.post('/login', {
                 LoginUserName: loginUser,
                 LoginPassword: loginPassword,
             });

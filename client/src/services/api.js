@@ -1,15 +1,24 @@
 import axios from "axios";
 
-const api = axios.create({
+const mainAPI = axios.create({
     baseURL: import.meta.env.VITE_API_URL
 });
 
-api.interceptors.request.use(config => {
-    const token = localStorage.getItem('token');
-    if (token) {
-        config.headers.Authorization = `Bearer ${token}`;
-    }
-    return config;
-})
+const listAPI = axios.create({
+    baseURL: import.meta.env.VITE_API_LISTURL
+});
 
-export default api;
+const setupInterceptors = (apiInstance) => {
+    apiInstance.interceptors.request.use(config => {
+        const token = localStorage.getItem('token');
+        if (token) {
+            config.headers.Authorization = `Bearer ${token}`;
+        }
+        return config;
+    });
+}; 
+
+setupInterceptors(mainAPI); 
+setupInterceptors(listAPI);
+
+export { mainAPI, listAPI };

@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './list.css'
+import { listAPI } from '../../services/api.js';
 
 import { FaEdit } from "react-icons/fa";
 import { TiDelete } from "react-icons/ti";
@@ -13,6 +14,7 @@ function List() {
     const [prays, setPrays] = useState([]);
     const [pray, setPray] = useState('');
     const [edit, setEdit] = useState(null);
+    const [error, setError] = useState('');
 
     const modal = useRef();
     const showModal = useCallback(() => {
@@ -36,51 +38,69 @@ function List() {
         const token = localStorage.getItem('token');
         if (!token) {
             navigate('/');
+        } else {
+            listAPI.get('/list')
+                .then(response => setPrays(response.data))
+                .catch(() => setError('Erro ao carregar orações. Tente novamente.'));
         }
     }, [navigate]);
 
     // Adicionar oração
-    const addPray = () => {
-        if (pray.trim() !== '') {
-            const existingPray = prays.find((item) => 
-                item.name.toLowerCase() === pray.trim().toLowerCase() && item.id !== edit
-            );
+    const addPray = async () => {
+        if (pray.trim() === '') {
+            setError('Por favor, insira uma oração.');
+            return;
+        }
+        
+        try {
+            const response = await listAPI.post('/list', {
+                task: pray,
+                completed: false,
+            })
 
-            if (existingPray) {
-                alert('Essa oração já existe na lista.');
-                return;
-            }
-
-            const newPray = {
-                id: edit !== null ? edit : Date.now(),
-                name: pray,
-                completed: false
-            }
-
-            if (edit !== null) {
-                setPrays(prays.map(item => (item.id === edit ? newPray : item)))
-            } else {
-                setPrays([...prays, newPray]);
-            }
-
+            setPrays([...prays, { id: response.data.id, task: pray, completed: false }]);
             setPray('');
-            setEdit(null);
             closeModal();
-        } else {
-            alert('Por favor, insira uma oração.');
+        } catch (err) {
+            if (err.response && err.response.data && err.response.data.err) {
+                setError(err.response.data.err);
+            } else {
+                setError('Erro ao adicionar oração. Tente novamente.');
+            }
+        }
+    }
+
+    // Checkbox
+    const handleCheckboxChange = async (id) => {
+        const updatedPray = prays.find(pray => pray.id === id);
+        updatedPray.completed = !updatedPray.completed;
+
+        try {
+            await listAPI.put(`/list/${id}`, { 
+                task: updatedPray.task, completed: updatedPray.completed 
+            });
+
+            setPrays(prays.map(pray => (pray.id === id ? updatedPray : pray)));
+        } catch {
+            setError('Erro ao atualizar oração. Tente novamente.');
         }
     };
+
+    // Excluir oração
+    const deletePray = async (id) => {
+        try {
+            await listAPI.delete(`/list/${id}`);
+            setPrays(prays.filter(pray => pray.id !== id));
+        } catch {
+            setError('Erro ao excluir oração. Tente novamente.');
+        }
+    }
 
     // Editar oração
     const editPray = (id, name) => {
         setPray(name);
         setEdit(id);
         showModal();
-    }
-
-    // Excluir oração
-    const deletePray = (id) => {
-        setPrays(prays.filter(item => item.id !== id));
     }
 
     return (
@@ -103,9 +123,9 @@ function List() {
                                 />
                             {pray.completed ? <MdCheckBox color='blue' /> : <MdCheckBoxOutlineBlank />}
                         </div>
-                        <span className='pray'>{pray.name}</span>
+                        <span className='pray'>{pray.task}</span>
                         <div className="buttons">
-                            <FaEdit size='2rem' color='blue' onClick={() => editPray(pray.id, pray.name)} />
+                            <FaEdit size='2rem' color='blue' onClick={() => editPray(pray.id, pray.task)} />
                             <TiDelete size='2rem' color='red' onClick={() => deletePray(pray.id)} />
                         </div>
                     </li>

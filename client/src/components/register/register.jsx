@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './register.css'
-import api from '../../services/api.js';
+import { mainAPI } from '../../services/api.js';
 
 function Register() {
     const [email, setEmail] = useState('');
@@ -12,7 +12,7 @@ function Register() {
 
     const createUser = async () => {
         try {
-            api.post('/register', {
+            mainAPI.post('/register', {
                 Email: email,
                 UserName: user,
                 Password: password,
@@ -21,6 +21,7 @@ function Register() {
             if (err.response && err.response.data && err.response.data.error) {
                 setError(err.response.data.error);
             } else {
+                console.log(err)
                 setError('Erro ao criar usuário. Tente novamente.');
             }
         }
@@ -85,7 +86,7 @@ function Register() {
                         placeholder="Confirmar Senha"
                         onChange={event => setConfirmPassword(event.target.value)}
                     />
-                    <button type="submit" onClick={createUser}>Registrar</button>
+                    <button type="submit">Registrar</button>
                     <span>Já tem uma conta?</span>
                     <a href="/">Faça Login</a>
                 </fieldset>
