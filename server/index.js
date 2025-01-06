@@ -7,6 +7,7 @@ const { Pool } = require('pg');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const authenticateToken = require('./middleware/auth.js');
+const SECRET_KEY = process.env.JWT_SECRET;
 
 app.use(cors());
 app.use(express.json());
