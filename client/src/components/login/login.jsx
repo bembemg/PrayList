@@ -50,24 +50,30 @@ function Login() {
                     <i>1 Tessalonicenses 5:17</i>
                 </aside>
                 <fieldset>
-                <h1>Login</h1>
-                <p>Usuário</p>
-                <input 
-                    type="user" 
-                    value={loginUser} 
-                    placeholder="Usuário" 
-                    onChange={(event) => setLoginUser(event.target.value)}
-                />
-                <p>Senha</p>
-                <input 
-                    type="password" 
-                    value={loginPassword}
-                    placeholder="Senha" 
-                    onChange={(event) => setLoginPassword(event.target.value)}
-                />
-                <button type="submit">Entrar</button>
-                <span>Não possui uma conta?</span>
-                <a href="/register">Registre-se</a>
+                    <h1>Login</h1>
+                    <div className="input-group">
+                        <p>Usuário</p>
+                        <input 
+                            type="user" 
+                            value={loginUser} 
+                            placeholder="Seu usuário" 
+                            onChange={(event) => setLoginUser(event.target.value)}
+                        />
+                    </div>
+                    <div className="input-group">
+                        <p>Senha</p>
+                        <input 
+                            type="password" 
+                            value={loginPassword}
+                            placeholder="Sua senha" 
+                            onChange={(event) => setLoginPassword(event.target.value)}
+                        />
+                    </div>
+                    <button type="submit">Entrar</button>
+                    <div className="auth-links">
+                        <span>Não possui uma conta?</span>
+                        <a href="/register">Registre-se</a>
+                    </div>
                 </fieldset>
             </form>
         </div>

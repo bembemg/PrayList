@@ -1,123 +1,152 @@
 .container {
-  max-width: 80rem;
-  height: 75vh;
-  margin-inline: auto;
-  margin-top: 15vh;
-  background-color: red;
+  font-family: "Arial", sans-serif;
+  background: #f9f9f9;
+  margin: 0 auto;
+  max-width: 800px;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 .container header {
-  display: flex;
-  justify-self: center;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 1.5rem;
-  background-color: blue;
-  width: 45vw;
-  height: 8vh;
-  font: var(--text-lg);
-  color: var(--text-color);
+  text-align: center;
+  margin-bottom: 2rem;
 }
-.container main {
-  display: flex;
-  justify-self: center;
-  background-color: green;
-  padding-top: 1.5rem;
-  width: 45vw;
-  height: 55vh;
+.container header h1 {
+  font-size: 2rem;
+  color: #333;
 }
 .container main ul {
   list-style: none;
+  padding: 0;
 }
 .container main ul li {
   display: flex;
-  background-color: purple;
-  width: 45vw;
-  height: 3.5rem;
-  margin-block: 1rem;
   align-items: center;
-}
-.container main ul li .pray {
-  font: var(--text-md);
-  color: var(--text-color);
+  justify-content: space-between;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  background: #ffffff;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 .container main ul li .checkbox {
-  margin-inline: 1rem 1rem;
-  size: 2rem;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
 }
-.container main ul li .checkbox input {
+.container main ul li .checkbox input[type=checkbox] {
   display: none;
+}
+.container main ul li .checkbox svg {
+  font-size: 1.5rem;
+}
+.container main ul li .pray {
+  flex: 1;
+  margin-left: 1rem;
+  font-size: 1rem;
+  color: #333;
+  text-decoration: none;
+}
+.container main ul li .pray.completed {
+  text-decoration: line-through;
+  color: #999;
 }
 .container main ul li .buttons {
   display: flex;
   gap: 1rem;
-  margin-inline: auto 1rem;
+}
+.container main ul li .buttons svg {
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+.container main ul li .buttons svg:hover {
+  transform: scale(1.1);
 }
 .container .include {
-  width: 45vw;
-  justify-self: center;
+  text-align: center;
+  margin-top: 2rem;
 }
 .container .include button {
-  display: flex;
-  font: var(--text-sm);
-  color: var(--text-color);
-  background-color: var(--aside-color);
-  width: 6rem;
-  height: 3rem;
-  margin-block: 1rem;
-  margin-left: auto;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
+  background: #4e9af1;
+  color: #ffffff;
   border: none;
-  border-radius: 12px;
+  border-radius: 4px;
+  padding: 0.8rem 1.2rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+.container .include button:hover {
+  background: #3a86d6;
 }
 .container .include dialog {
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 25vw;
-  height: 50vh;
+  border: none;
+  border-radius: 8px;
+  padding: 2rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  max-width: 500px;
+  margin: auto;
 }
 .container .include dialog .dialog-header {
   display: flex;
-  justify-content: center;
-}
-.container .include dialog .dialog-header #cancel-btn {
-  position: absolute;
-  left: 0;
-  margin: 0.75rem;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
 }
 .container .include dialog .dialog-header h1 {
-  font: var(--text-md);
-  place-self: center;
-  margin-top: 1rem;
+  font-size: 1.5rem;
+  color: #333;
+}
+.container .include dialog .dialog-header #cancel-btn {
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+.container .include dialog .dialog-header #cancel-btn:hover {
+  transform: scale(1.1);
 }
 .container .include dialog .input-pray {
-  margin: 3rem 0.75rem;
+  margin-bottom: 1.5rem;
 }
 .container .include dialog .input-pray p {
-  font: var(--text-md);
-  color: var(--text-color);
+  margin-bottom: 0.5rem;
+  font-weight: bold;
 }
 .container .include dialog .input-pray input {
   width: 100%;
-  height: 4rem;
-  font: var(--text-sm);
-  color: var(--text-color);
-  margin-top: 0.75rem;
-  padding-inline: 0.5rem;
-  border-radius: 12px;
-  border: var(--text-color) 1px solid;
+  padding: 0.8rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+.container .include dialog .input-pray input:focus {
+  outline: none;
+  border-color: #4e9af1;
+  box-shadow: 0 0 5px rgba(78, 154, 241, 0.5);
 }
 .container .include dialog #add {
-  position: absolute;
-  width: calc(100% - 1.5rem);
-  margin-inline: 0.75rem;
-  height: 5rem;
-  bottom: 0;
+  background: #4e9af1;
+  color: #ffffff;
+  border: none;
+  border-radius: 4px;
+  padding: 0.8rem 1.2rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s;
 }
-.container a {
-  display: flex;
-  font: var(--text-md);
-  color: var(--text-color);
+.container .include dialog #add:hover {
+  background: #3a86d6;
+}
+.container button {
+  margin-top: 1rem;
+  background: #e74c3c;
+  color: #ffffff;
+  border: none;
+  border-radius: 4px;
+  padding: 0.8rem 1.2rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+.container button:hover {
+  background: #c0392b;
 }/*# sourceMappingURL=list.css.map */

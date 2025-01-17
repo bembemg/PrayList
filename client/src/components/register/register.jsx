@@ -87,8 +87,11 @@ function Register() {
                         onChange={event => setConfirmPassword(event.target.value)}
                     />
                     <button type="submit">Registrar</button>
-                    <span>Já tem uma conta?</span>
-                    <a href="/">Faça Login</a>
+
+                    <div className="login-page">
+                        <span>Já tem uma conta?</span>
+                        <a href="/">Faça Login</a>
+                    </div>
                 </fieldset>
             </form>
         </div>

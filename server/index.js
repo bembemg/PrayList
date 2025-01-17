@@ -14,18 +14,16 @@ app.use(express.json());
 app.use(bodyParser.json());
 
 const pool = new Pool({
-    user: process.env.DB_USER,
-    host: process.env.DB_HOST,
-    database: process.env.DB_NAME,
-    password: process.env.DB_PASSWORD,
-    port: process.env.DB_PORT,
-    ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false
+    connectionString: process.env.DATABASE_URL,
+    ssl: {
+        rejectUnauthorized: false
+    }
 });
 
 async function initializeDB() {
     try {
         await pool.query(`
-            CREATE TABLE IF NOT EXISTS users (
+            CREATE TABLE IF NOT EXISTS users_praylist (
             id SERIAL PRIMARY KEY,
             email VARCHAR(255) NOT NULL,
             username VARCHAR(255) NOT NULL,
@@ -49,7 +47,7 @@ app.post('/register', async (req, res) => {
     }
     try {
         const userCheck = await pool.query(
-            `SELECT * FROM users WHERE username = $1`,
+            `SELECT * FROM users_praylist WHERE username = $1`,
             [UserName]
         );
         if (userCheck.rows.length > 0) {
@@ -57,7 +55,7 @@ app.post('/register', async (req, res) => {
         }
 
         const emailCheck = await pool.query(
-            `SELECT * FROM users WHERE email = $1`,
+            `SELECT * FROM users_praylist WHERE email = $1`,
             [Email]
         );
         if (emailCheck.rows.length > 0) {
@@ -65,7 +63,7 @@ app.post('/register', async (req, res) => {
         }
 
         const SQL = await pool.query(
-            `INSERT INTO users (email, username, password)
+            `INSERT INTO users_praylist (email, username, password)
             VALUES ($1, $2, $3)
             RETURNING id`,
             [Email, UserName, Password]
@@ -85,7 +83,7 @@ app.post('/login', async (req, res) => {
 
     try {
         const SQL = await pool.query(
-            `SELECT * FROM users WHERE username = $1 AND password = $2`,
+            `SELECT * FROM users_praylist WHERE username = $1 AND password = $2`,
             [ LoginUserName, LoginPassword]
         );
 

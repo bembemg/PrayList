@@ -13,22 +13,20 @@ app.use(express.json());
 app.use(bodyParser.json());
 
 const pool = new Pool({
-    user: process.env.DB_USER,
-    host: process.env.DB_HOST,
-    database: process.env.DB_NAME,
-    password: process.env.DB_PASSWORD,
-    port: process.env.DB_PORT,
-    ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false
+    connectionString: process.env.DATABASE_URL,
+    ssl: {
+        rejectUnauthorized: false
+    }
 });
 
 async function initializeListDB() {
     try {
         await pool.query(`
-            CREATE TABLE IF NOT EXISTS list (
+            CREATE TABLE IF NOT EXISTS list_praylist (
             id SERIAL PRIMARY KEY,
             task VARCHAR(255) NOT NULL,
             completed BOOLEAN DEFAULT FALSE,
-            user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE
+            user_id INTEGER NOT NULL REFERENCES users_praylist(id) ON DELETE CASCADE
             )
             `)
         console.log('Tabela list criada ou já existente')
@@ -45,7 +43,7 @@ app.post('/list', authenticateToken, async (req, res) => {
 
     try {
         const taskCheck = await pool.query(
-            `SELECT * FROM list WHERE task = $1 AND user_id = $2`,
+            `SELECT * FROM list_praylist WHERE task = $1 AND user_id = $2`,
             [task, userId]
         );
         if (taskCheck.rows.length > 0) {
@@ -53,7 +51,7 @@ app.post('/list', authenticateToken, async (req, res) => {
         }
 
         const SQL = await pool.query(
-            `INSERT INTO list (task, completed, user_id)
+            `INSERT INTO list_praylist (task, completed, user_id)
             VALUES ($1, $2, $3)
             RETURNING id`,
             [task, completed, userId]
@@ -72,7 +70,7 @@ app.get('/list', authenticateToken, async (req, res) => {
 
     try {
         const SQL = await pool.query(
-            `SELECT * FROM list WHERE user_id = $1`,
+            `SELECT * FROM list_praylist WHERE user_id = $1`,
             [userId]
         );
         res.json(SQL.rows);
@@ -88,7 +86,7 @@ app.put('/list/:id', authenticateToken, async (req, res) => {
 
     try {
         await pool.query(
-            `UPDATE list SET task = $1, completed = $2 WHERE id = $3 AND user_id = $4`,
+            `UPDATE list_praylist SET task = $1, completed = $2 WHERE id = $3 AND user_id = $4`,
             [task, completed, id, userId]
         );
         res.json({ message: 'Tarefa atualizada com sucesso!' });
@@ -103,7 +101,7 @@ app.delete('/list/:id', authenticateToken, async (req, res) => {
 
     try {
         await pool.query(
-            `DELETE FROM list WHERE id = $1 AND user_id = $2`,
+            `DELETE FROM list_praylist WHERE id = $1 AND user_id = $2`,
             [id, userId]
         );
 
@@ -116,7 +114,7 @@ app.delete('/list/:id', authenticateToken, async (req, res) => {
 schedule.scheduleJob('0 0 * * *', async () => {
     try {
         await pool.query(`
-            UPDATE list SET completed = false
+            UPDATE list_praylist SET completed = false
             `)
         console.log("Todos os estados 'completed' redefinidos com sucesso!");
     } catch (error) {
