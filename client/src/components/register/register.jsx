@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import './register.css'
 import { mainAPI } from '../../services/api.js';
+import './register.css';
 
 function Register() {
     const [email, setEmail] = useState('');

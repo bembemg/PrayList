@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import './list.css'
 import { listAPI } from '../../services/api.js';
+import './list.css';
 
 import { FaEdit } from "react-icons/fa";
 import { TiDelete } from "react-icons/ti";
