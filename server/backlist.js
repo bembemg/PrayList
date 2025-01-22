@@ -13,10 +13,7 @@ app.use(express.json());
 app.use(bodyParser.json());
 
 const pool = new Pool({
-    connectionString: process.env.DATABASE_URL,
-    ssl: {
-        rejectUnauthorized: false
-    }
+    connectionString: process.env.DATABASE_URL
 });
 
 async function initializeListDB() {
