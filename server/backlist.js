@@ -86,8 +86,10 @@ app.put('/list/:id', authenticateToken, async (req, res) => {
             `UPDATE list_praylist SET task = $1, completed = $2 WHERE id = $3 AND user_id = $4`,
             [task, completed, id, userId]
         );
+        console.log('Tarefa atualizada com sucesso!');
         res.json({ message: 'Tarefa atualizada com sucesso!' });
     } catch (error) {
+        console.log('Erro ao atualizar tarefa:', error);
         res.status(500).json({ error: 'Erro ao atualizar tarefa' });
     }
 })
