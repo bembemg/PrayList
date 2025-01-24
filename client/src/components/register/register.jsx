@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { mainAPI } from '../../services/api.js';
 import DarkModeToggle from '../darkMode.jsx';
+import { MdErrorOutline } from 'react-icons/md';
 // import './register.css';
 
 function Register() {
@@ -9,23 +10,32 @@ function Register() {
     const [user, setUser] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
+
     const [error, setError] = useState('');
 
+    useEffect(() => {
+        if (error) {
+            const timer = setTimeout(() => {
+                setError('');
+            }, 5000);
+
+            return () => clearTimeout(timer);
+        }
+    }, [error]);
+
     const createUser = async () => {
-        try {
             mainAPI.post('/register', {
                 Email: email,
                 UserName: user,
                 Password: password,
             })
-        } catch (err) {
-            if (err.response && err.response.data && err.response.data.error) {
-                setError(err.response.data.error);
-            } else {
-                console.log(err)
-                setError('Erro ao criar usuário. Tente novamente.');
-            }
-        }
+            .then((response) => {
+                // console.log(response.data);
+                navigate('/');
+            })
+            .catch((err) => {
+                setError(err.response && err.response.data ? err.response.data.error : 'Erro ao criar usuário. Tente novamente.');
+            });
     }
 
     const navigate  = useNavigate();
@@ -45,15 +55,14 @@ function Register() {
         } else {
             setError('Preencha todos os campos');
         }
-
     }
 
     return (
-        <div className="min-h-screen bg-50 dark:bg-800 py-4 px-4 sm:px-6 lg:px-8">
+        <div className="min-h-screen bg-50 dark:bg-900 py-4 px-4 sm:px-6 lg:px-8">
             <DarkModeToggle />
             <form className="max-w-6xl mx-auto flex gap-8">
                 {/* Welcome Section */}
-                <aside className="flex-1 bg-100 dark:bg-700 rounded-2xl p-8 shadow-lg">
+                <aside className="flex-1 bg-300 dark:bg-700 rounded-2xl p-8 shadow-lg shadow-slate-400 dark:shadow-none hover:scale-105 transition-all duration-300 ease-in-out cursor-default">
                     <div className="h-full flex flex-col justify-center items-center">
                         <h1 className="font-montserrat font-extrabold text-4xl text-gray-800 dark:text-100 mb-6">
                             Registre-se, é grátis!
@@ -74,12 +83,13 @@ function Register() {
                     </h1>
                     
                     {error && (
-                        <div className="bg-red-100 dark:bg-red-900 text-red-600 dark:text-red-400 p-3 rounded-lg mb-6 font-montserrat">
-                            {error}
+                        <div className="text-center mb-6 flex items-center gap-2 bg-red-100 text-red-600 p-3 rounded-lg border border-red-200 animate-[slideDown_5s_ease-in-out]" role="alert">
+                            <MdErrorOutline className="text-xl flex-shrink-0"/>
+                            <p className="font-montserrat text-sm">{error}</p>
                         </div>
                     )}
 
-                    <div className="space-y-6">
+                    <div className={`space-y-3 transition-all duration-300 ease-in-out ${error ? 'animate-contentSlideDown' : ''}`}>
                         <div>
                             <label className="font-montserrat font-medium text-gray-800 dark:text-100 block mb-2">
                                 Email

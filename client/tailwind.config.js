@@ -24,6 +24,24 @@ export default {
         'montserrat': ['Montserrat', 'sans-serif'],
       }
     },
+    keyframes: {
+      slideDown: {
+        '0%': { transform: 'translateY(-10px)', opacity: 0 },
+        '10%': { transform: 'translateY(0)', opacity: 1 },
+        '90%': { transform: 'translateY(0)', opacity: 1 },
+        '100%': { transform: 'translateY(-10px)', opacity: -1 },
+      },
+      contentSlideDown: {
+        '0%': { transform: 'translateY(-70px)' },
+        '10%': { transform: 'translateY(10px)', },
+        '90%': { transform: 'translateY(10px)', },
+        '100%': { transform: 'translateY(-70px)' },
+      },
+    },
+    animation: {
+      slideDown: 'slideDown 5s ease-in-out forwards',
+      contentSlideDown: 'contentSlideDown 5s ease-in-out forwards',
+    }
   },
   plugins: [
     require('tailwind-scrollbar'),
