@@ -58,27 +58,27 @@ function Register() {
     }
 
     return (
-        <div className="min-h-screen bg-50 dark:bg-900 py-4 px-4 sm:px-6 lg:px-8">
+        <div className="min-h-screen bg-50 dark:bg-zinc-950 py-4 px-4 sm:px-6 lg:px-8 transition-all duration-300 ease-in-out">
             <DarkModeToggle />
             <form className="max-w-6xl mx-auto flex gap-8">
                 {/* Welcome Section */}
-                <aside className="flex-1 bg-300 dark:bg-700 rounded-2xl p-8 shadow-lg shadow-slate-400 dark:shadow-none hover:scale-105 transition-all duration-300 ease-in-out cursor-default">
+                <aside className="flex-1 bg-300 dark:bg-400 rounded-2xl p-8 shadow-lg shadow-slate-400 dark:shadow-none hover:scale-105 transition-all duration-300 ease-in-out cursor-default">
                     <div className="h-full flex flex-col justify-center items-center">
-                        <h1 className="font-montserrat font-extrabold text-4xl text-gray-800 dark:text-100 mb-6">
+                        <h1 className="font-montserrat font-extrabold text-4xl text-gray-800 mb-6">
                             Registre-se, é grátis!
                         </h1>
-                        <p className="font-montserrat font-semibold text-2xl text-gray-700 dark:text-150 mb-2">
+                        <p className="font-montserrat font-semibold text-2xl text-gray-800 mb-2">
                             "Orai sem cessar"
                         </p>
-                        <i className="font-montserrat italic text-lg text-950 dark:text-50">
+                        <i className="font-montserrat italic text-lg text-800 dark:text-950 transition-all duration-300 ease-in-out">
                             1 Tessalonicenses 5:17
                         </i>
                     </div>
                 </aside>
 
                 {/* Register Form */}
-                <div className="w-[450px] bg-white dark:bg-700 rounded-2xl p-8 shadow-lg">
-                    <h1 className="font-montserrat font-bold text-3xl text-gray-800 dark:text-100 mb-8">
+                <div className="w-[450px] bg-white dark:bg-zinc-800 rounded-2xl p-8 shadow-lg shadow-slate-400 dark:shadow-none transition-all duration-300 ease-in-out">
+                    <h1 className="font-montserrat font-bold text-3xl text-gray-800 dark:text-white mb-8">
                         Registre-se
                     </h1>
                     
@@ -91,12 +91,12 @@ function Register() {
 
                     <div className={`space-y-3 transition-all duration-300 ease-in-out ${error ? 'animate-contentSlideDown' : ''}`}>
                         <div>
-                            <label className="font-montserrat font-medium text-gray-800 dark:text-100 block mb-2">
+                            <label className="font-montserrat font-medium text-gray-800 dark:text-white block mb-2">
                                 Email
                             </label>
                             <input 
                                 type="email"
-                                className="w-full px-4 py-3 rounded-lg border border-200 dark:border-600 bg-white dark:bg-800 text-800 dark:text-50 focus:ring-2 focus:ring-500 dark:focus:ring-300 focus:border-transparent outline-none transition font-montserrat"
+                                className="w-full px-4 py-3 rounded-lg border border-400 bg-white dark:bg-zinc-800 text-800 dark:text-white focus:ring-2 focus:ring-500 focus:border-transparent outline-none transition-all duration-300 ease-in-out font-montserrat focus:scale-105 focus:shadow-200 dark:focus:shadow-400 focus:shadow-[0px_7px_20px_1px]"
                                 placeholder="Email"
                                 value={email}
                                 onChange={event => setEmail(event.target.value)}
@@ -104,12 +104,12 @@ function Register() {
                         </div>
 
                         <div>
-                            <label className="font-montserrat font-medium text-gray-800 dark:text-100 block mb-2">
+                            <label className="font-montserrat font-medium text-gray-800 dark:text-white block mb-2">
                                 Usuário
                             </label>
                             <input 
                                 type="text"
-                                className="w-full px-4 py-3 rounded-lg border border-200 dark:border-600 bg-white dark:bg-800 text-800 dark:text-50 focus:ring-2 focus:ring-500 dark:focus:ring-300 focus:border-transparent outline-none transition font-montserrat"
+                                className="w-full px-4 py-3 rounded-lg border border-400 bg-white dark:bg-zinc-800 text-800 dark:text-white focus:ring-2 focus:ring-500 focus:border-transparent outline-none transition-all duration-300 ease-in-out font-montserrat focus:scale-105 focus:shadow-200 dark:focus:shadow-400 focus:shadow-[0px_7px_20px_1px]"
                                 placeholder="Usuário"
                                 value={user}
                                 onChange={event => setUser(event.target.value)}
@@ -117,12 +117,12 @@ function Register() {
                         </div>
 
                         <div>
-                            <label className="font-montserrat font-medium text-gray-800 dark:text-100 block mb-2">
+                            <label className="font-montserrat font-medium text-gray-800 dark:text-white block mb-2">
                                 Senha
                             </label>
                             <input 
                                 type="password"
-                                className="w-full px-4 py-3 rounded-lg border border-200 dark:border-600 bg-white dark:bg-800 text-800 dark:text-50 focus:ring-2 focus:ring-500 dark:focus:ring-300 focus:border-transparent outline-none transition font-montserrat"
+                                className="w-full px-4 py-3 rounded-lg border border-400 bg-white dark:bg-zinc-800 text-800 dark:text-white focus:ring-2 focus:ring-500 focus:border-transparent outline-none transition-all duration-300 ease-in-out font-montserrat focus:scale-105 focus:shadow-200 dark:focus:shadow-400 focus:shadow-[0px_7px_20px_1px]"
                                 placeholder="Senha"
                                 value={password}
                                 onChange={event => setPassword(event.target.value)}
@@ -130,12 +130,12 @@ function Register() {
                         </div>
 
                         <div>
-                            <label className="font-montserrat font-medium text-gray-800 dark:text-100 block mb-2">
+                            <label className="font-montserrat font-medium text-gray-800 dark:text-white block mb-2">
                                 Confirmar Senha
                             </label>
                             <input 
                                 type="password"
-                                className="w-full px-4 py-3 rounded-lg border border-200 dark:border-600 bg-white dark:bg-800 text-800 dark:text-50 focus:ring-2 focus:ring-500 dark:focus:ring-300 focus:border-transparent outline-none transition font-montserrat"
+                                className="w-full px-4 py-3 rounded-lg border border-400 bg-white dark:bg-zinc-800 text-800 dark:text-white focus:ring-2 focus:ring-500 focus:border-transparent outline-none transition-all duration-300 ease-in-out font-montserrat focus:scale-105 focus:shadow-200 dark:focus:shadow-400 focus:shadow-[0px_7px_20px_1px]"
                                 placeholder="Confirmar Senha"
                                 value={confirmPassword}
                                 onChange={event => setConfirmPassword(event.target.value)}
@@ -144,19 +144,19 @@ function Register() {
 
                         <button 
                             type="submit"
-                            className="w-full bg-300 dark:bg-600 hover:bg-400 dark:hover:bg-500 text-gray-800 dark:text-50 font-montserrat font-medium py-3 rounded-lg transition-colors duration-200 ease-in-out"
+                            className="w-full bg-300 dark:bg-400 hover:bg-400 dark:hover:bg-500 text-gray-600 dark:text-gray-800  font-montserrat font-medium py-3 rounded-lg transition-all duration-300 ease-in-out hover:shadow-200 hover:shadow-lg dark:hover:shadow-950"
                             onClick={handleSubmit}
                         >
                             Registrar
                         </button>
 
                         <div className="text-center mt-4">
-                            <span className="font-montserrat text-gray-700 dark:text-100">
+                            <span className="font-montserrat text-gray-700 dark:text-white">
                                 Já tem uma conta?{' '}
                             </span>
                             <a 
                                 href="/"
-                                className="font-montserrat text-600 dark:text-300 hover:text-700 dark:hover:text-200 transition-colors duration-200"
+                                className="font-montserrat text-500 dark:text-400 hover:text-700 dark:hover:text-600 transition-colors duration-300"
                             >
                                 Faça Login
                             </a>

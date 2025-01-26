@@ -16,6 +16,7 @@ function List() {
     const [pray, setPray] = useState('');
     const [edit, setEdit] = useState(null);
     const [error, setError] = useState('');
+    const [isClosing, setIsClosing] = useState(false);
 
     const modal = useRef();
     const showModal = useCallback(() => {
@@ -25,9 +26,13 @@ function List() {
     }, [])
     const closeModal = useCallback(() => {
         if (modal.current) {
-            modal.current.close();
-            setEdit(null);
-            setPray('');
+            setIsClosing(true);
+            setTimeout(() => {
+                modal.current.close();
+                setIsClosing(false);
+                setEdit(null);
+                setPray('');
+            }, 500);
         }
     }, [])
 
@@ -119,17 +124,17 @@ function List() {
     }
 
     return (
-        <div className="min-h-screen bg-50 dark:bg-800 py-4 px-4 sm:px-6 lg:px-8">
+        <div className="min-h-screen bg-50 dark:bg-zinc-950 py-4 px-4 sm:px-6 lg:px-8 transition-all duration-300 ease-in-out">
         <DarkModeToggle />
-        <section className="max-w-6xl mx-auto bg-white dark:bg-700 rounded-2xl p-8 shadow-lg mt-10 h-[42.5rem]">
-            <header className="sticky top-0 bg-white dark:bg-700 pt-2 pb-4 z-10 justify-items-center">
-                <h1 className="font-montserrat font-bold text-3xl text-gray-800 dark:text-100 h-16py-4">Lista de Orações</h1>
+        <section className="max-w-6xl mx-auto bg-white dark:bg-zinc-900 rounded-2xl p-8 shadow-lg mt-10 h-[47.5rem] transition-all duration-300 ease-in-out">
+            <header className="sticky top-0 bg-white dark:bg-zinc-900 pt-2 pb-4 z-10 justify-items-center transition-all duration-300 ease-in-out">
+                <h1 className="font-montserrat font-bold text-3xl text-gray-800 dark:text-100 h-16py-4 transition-all duration-300 ease-in-out">Lista de Orações</h1>
             </header>
             
-            <main className="space-y-4 pt-2 overflow-y-auto h-[calc(100%-8rem)] scrollbar-thin scrollbar-thumb-600 scrollbar-track-200 hover:scrollbar-thumb-700 dark:scrollbar-thumb-300 dark:scrollbar-track-600 dark:hover:scrollbar-thumb-400">
+            <main className="space-y-4 pt-2 overflow-y-auto h-[calc(100%-7rem)] scrollbar-thin scrollbar-thumb-400 scrollbar-track-200 hover:scrollbar-thumb-600 dark:scrollbar-thumb-zinc-700 dark:scrollbar-track-zinc-800 transition-all duration-300 ease-in-out">
                 <ul className="space-y-3">
                     {prays.map(pray => (
-                        <li key={pray.id} className="flex items-center justify-between p-4 bg-50 dark:bg-800 rounded-lg">
+                        <li key={pray.id} className="flex items-center justify-between p-4 bg-100 dark:bg-zinc-800 rounded-lg transition-all duration-300 ease-in-out">
                             <div className="flex items-center gap-3">
                                 <div className="cursor-pointer" onClick={() => handleCheckboxChange(pray.id)}>
                                     <input 
@@ -141,22 +146,23 @@ function List() {
                                         className="hidden"
                                     />
                                     {pray.completed ? 
-                                        <MdCheckBox className="text-600 dark:text-300 text-2xl" /> : 
-                                        <MdCheckBoxOutlineBlank className="text-600 dark:text-300 text-2xl" />
+                                        <MdCheckBox className="text-400 text-2xl"/> : 
+                                        <MdCheckBoxOutlineBlank className="text-400 text-2xl"/>
                                     }
                                 </div>
-                                <span className={`font-montserrat text-gray-800 dark:text-100 ${pray.completed ? 'line-through' : ''}`}>
+                                <span className="font-montserrat text-gray-800 dark:text-100 relative transition-all duration-1000 ease-in-out">
                                     {pray.task}
+                                    <span className={`absolute left-0 top-1/2 h-[2px] bg-600 dark:bg-400 transition-all duration-300 ease-in-out ${pray.completed ? "w-full" : "w-0"}`} style={{ transform: "translateY(-50%) "}}></span>
                                 </span>
                             </div>
                             <div className="flex gap-2">
                                 <button onClick={() => editPray(pray.id, pray.task)}
-                                    className="p-2 hover:bg-100 dark:hover:bg-600 rounded-lg transition-colors">
-                                    <FaEdit className="text-600 dark:text-300 text-xl" />
+                                    className="p-2 hover:bg-300 dark:hover:bg-900 rounded-full transition-all duration-300 ease-in-out">
+                                    <FaEdit className="text-600 dark:text-400 text-xl transition-all duration-300 ease-in-out"/>
                                 </button>
                                 <button onClick={() => deletePray(pray.id)}
-                                    className="p-2 hover:bg-red-100 dark:hover:bg-red-900 rounded-lg transition-colors">
-                                    <TiDelete className="text-red-600 dark:text-red-400 text-xl" />
+                                    className="p-2 hover:bg-red-200 dark:hover:bg-red-900 rounded-full transition-all duration-300 ease-in-out">
+                                    <TiDelete className="text-red-600 dark:text-red-400 text-xl transition-all duration-300 ease-in-out" />
                                 </button>
                             </div>
                         </li>
@@ -164,30 +170,30 @@ function List() {
                 </ul>
             </main>
 
-            <section className="mt-8 flex justify-between">
+            <section className="mt-5 flex justify-between">
                 <button 
                     onClick={showModal}
-                    className="bg-600 dark:bg-300 hover:bg-700 dark:hover:bg-400 text-white dark:text-gray-800 font-montserrat font-medium px-6 py-3 rounded-lg transition-colors duration-200"
+                    className="bg-300 dark:bg-400 hover:bg-400 dark:hover:bg-500 text-gray-600 dark:text-gray-800 font-montserrat font-medium px-6 py-3 rounded-lg transition-all duration-300 hover:shadow-[0px_0px_10px_5px] hover:shadow-200 hover:scale-105 dark:hover:shadow-950"
                 >
                     Incluir
                 </button>
 
                 <button 
                     onClick={handleLogout}
-                    className="bg-red-600 hover:bg-red-700 text-white font-montserrat font-medium px-6 py-3 rounded-lg transition-colors duration-200"
+                    className="bg-red-500 hover:bg-red-600 text-white font-montserrat font-medium px-6 py-3 rounded-lg transition-all duration-300 hover:shadow-[0px_0px_10px_5px] hover:shadow-red-200 hover:scale-105 dark:hover:shadow-red-900"
                 >
                     Logout
                 </button>
             </section>
 
-            <dialog ref={modal} className="rounded-2xl p-0 bg-white dark:bg-700 shadow-xl backdrop:bg-gray-800/50 top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]">
+            <dialog ref={modal} className={`rounded-2xl p-0 bg-white dark:bg-zinc-800 shadow-xl origin-top-left transition-all duration-300 ease-in-out ${isClosing ? 'animate-closeDialog' : 'animate-openDialog'}`}>
                 <div className="p-6 w-[450px]">
                     <div className="flex items-center justify-between mb-6">
                         <h2 className="font-montserrat font-bold text-2xl text-gray-800 dark:text-100">
                             {edit !== null ? 'Editar Oração' : 'Adicionar Oração'}
                         </h2>
-                        <button onClick={closeModal} className="p-2 hover:bg-red-100 dark:hover:bg-red-900 rounded-lg transition-colors">
-                            <IoMdClose className="text-red-600 dark:text-red-400 text-xl" />
+                        <button onClick={closeModal} className="p-2 hover:bg-red-200 dark:hover:bg-red-900 rounded-full transition-all duration-300 ease-in-out">
+                            <IoMdClose className="text-red-600 dark:text-red-400 text-xl transition-all duration-300 ease-in-out" />
                         </button>
                     </div>
 
@@ -201,13 +207,13 @@ function List() {
                                 placeholder="Digite sua oração" 
                                 value={pray}
                                 onChange={(event) => setPray(event.target.value)}
-                                className="w-full px-4 py-3 rounded-lg border border-200 dark:border-600 bg-white dark:bg-800 text-800 dark:text-50 focus:ring-2 focus:ring-500 dark:focus:ring-300 focus:border-transparent outline-none transition font-montserrat"
+                                className="w-full px-4 py-3 font-montserrat rounded-lg border border-400 bg-white dark:bg-zinc-800 text-800 dark:text-white focus:ring-2 focus:ring-500 focus:border-transparent outline-none transition duration-300 ease-in-out focus:shadow-[0px_0px_5px_3px] focus:shadow-200 dark:focus:shadow-400"
                             />
                         </div>
 
                         <button 
                             onClick={addPray}
-                            className="w-full bg-600 dark:bg-300 hover:bg-700 dark:hover:bg-400 text-white dark:text-gray-800 font-montserrat font-medium py-3 rounded-lg transition-colors duration-200"
+                            className="w-full bg-300 dark:bg-400 hover:bg-400 dark:hover:bg-500 text-gray-600 dark:text-gray-800 font-montserrat font-medium px-6 py-3 rounded-lg transition-all duration-300 hover:shadow-[0px_0px_10px_5px] hover:shadow-200 dark:hover:shadow-950"
                         >
                             {edit !== null ? 'Salvar' : 'Adicionar'}
                         </button>

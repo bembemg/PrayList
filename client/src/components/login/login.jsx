@@ -77,8 +77,8 @@ function Login() {
                 </aside>
 
                 {/* Login Form */}
-                <div className="w-[450px] bg-white rounded-2xl p-8 shadow-lg shadow-slate-400 dark:shadow-none transition-all duration-300 ease-in-out">
-                    <h1 className="font-montserrat font-bold text-3xl text-gray-800 mb-8">Login</h1>
+                <div className="w-[450px] bg-white dark:bg-zinc-800 rounded-2xl p-8 shadow-lg shadow-slate-400 dark:shadow-none transition-all duration-300 ease-in-out">
+                    <h1 className="font-montserrat font-bold text-3xl text-gray-800 dark:text-white mb-8">Login</h1>
 
                     {error && (
                         <div className="text-center mb-6 flex items-center gap-2 bg-red-100 text-red-600 p-3 rounded-lg border border-red-200 animate-[slideDown_5s_ease-in-out]" role="alert">
@@ -89,12 +89,12 @@ function Login() {
                     
                     <div className={`space-y-6 transition-all duration-300 ease-in-out ${error ? 'animate-contentSlideDown' : ''}`}>
                         <div>
-                            <label className="font-montserrat font-medium text-gray-800 block mb-2">
+                            <label className="font-montserrat font-medium text-gray-800 dark:text-white block mb-2">
                                 Usuário
                             </label>
                             <input 
                                 type="text"
-                                className="w-full px-4 py-3 font-montserrat rounded-lg border border-400 bg-white text-800 focus:ring-2 focus:ring-500 focus:border-transparent outline-none transition duration-300 ease-in-out focus:shadow-xl focus:shadow-200 focus:scale-105"
+                                className="w-full px-4 py-3 font-montserrat rounded-lg border border-400 bg-white dark:bg-zinc-800 text-800 dark:text-white focus:ring-2 focus:ring-500 focus:border-transparent outline-none transition duration-300 ease-in-out focus:shadow-[0px_7px_20px_1px] focus:shadow-200 dark:focus:shadow-400 focus:scale-105"
                                 placeholder='Usuário'
                                 value={loginUser}
                                 onChange={(e) => setLoginUser(e.target.value)}
@@ -102,12 +102,12 @@ function Login() {
                         </div>
 
                         <div>
-                            <label className="font-montserrat font-medium text-gray-800 block mb-2">
+                            <label className="font-montserrat font-medium text-gray-800 dark:text-white block mb-2">
                                 Senha
                             </label>
                             <input 
                                 type="password"
-                                className="w-full px-4 py-3 font-montserrat rounded-lg border border-400 bg-white text-800 focus:ring-2 focus:ring-500 focus:border-transparent outline-none transition duration-300 ease-in-out focus:shadow-xl focus:shadow-200 focus:scale-105"
+                                className="w-full px-4 py-3 font-montserrat rounded-lg border border-400 bg-white dark:bg-zinc-800 text-800 dark:text-white focus:ring-2 focus:ring-500 focus:border-transparent outline-none transition duration-300 ease-in-out focus:shadow-[0px_7px_20px_1px] focus:shadow-200 dark:focus:shadow-400 focus:scale-105"
                                 placeholder='Senha'
                                 value={loginPassword}
                                 onChange={(e) => setLoginPassword(e.target.value)}
@@ -115,19 +115,19 @@ function Login() {
                         </div>
                         
                         <button 
-                            className="w-full bg-300 hover:bg-400 text-gray-800 font-montserrat font-medium py-3 rounded-lg transition-all duration-300 ease-in-out"
+                            className="w-full bg-300 dark:bg-400 hover:bg-400 dark:hover:bg-500 text-gray-600 dark:text-gray-800  font-montserrat font-medium py-3 rounded-lg transition-all duration-300 ease-in-out hover:shadow-200 hover:shadow-lg dark:hover:shadow-950"
                             onClick={login}
                         >
                             Login
                         </button>
 
                         <div className="text-center mt-4">
-                            <span className="font-montserrat text-gray-700">
+                            <span className="font-montserrat text-gray-700 dark:text-white">
                                 Ainda não tem uma conta?{' '}
                             </span>
                             <a 
                                 href="/register" 
-                                className="font-montserrat text-600 hover:text-700 transition-colors duration-200"
+                                className="font-montserrat text-500 dark:text-400 hover:text-700 dark:hover:text-600 transition-all duration-300"
                             >
                                 Registre-se
                             </a>

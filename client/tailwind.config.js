@@ -37,11 +37,23 @@ export default {
         '90%': { transform: 'translateY(10px)', },
         '100%': { transform: 'translateY(-70px)' },
       },
+      openDialog: {
+        '0%': { transform: 'scale(0) translate(-50%, -50%)', opacity: 0, top: '50%', left: '50%', },
+        '50%': { transform: 'scale(1.2) translate(-50%, -50%)', opacity: 1, top: '50%', left: '50%' },
+        '100%': { transform: 'scale(1) translate(-50%, -50%)', opacity: 1, top: '50%', left: '50%' },
+      },
+      closeDialog: {
+        '0%': { transform: 'scale(1) translate(-50%, -50%)', opacity: 1, top: '50%', left: '50%', },
+        '50%': { transform: 'scale(1.2) translate(-50%, -50%)', opacity: 1, top: '50%', left: '50%' },
+        '100%': { transform: 'scale(0) translate(-50%, -50%)', opacity: 0, top: '50%', left: '50%' }
+      },
     },
     animation: {
       slideDown: 'slideDown 5s ease-in-out forwards',
       contentSlideDown: 'contentSlideDown 5s ease-in-out forwards',
-    }
+      openDialog: 'openDialog .5s ease-in-out forwards',
+      closeDialog: 'closeDialog .5s ease-in-out forwards',
+    },
   },
   plugins: [
     require('tailwind-scrollbar'),
