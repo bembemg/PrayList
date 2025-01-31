@@ -23,7 +23,8 @@ async function initializeListDB() {
             id SERIAL PRIMARY KEY,
             task VARCHAR(255) NOT NULL,
             completed BOOLEAN DEFAULT FALSE,
-            user_id INTEGER NOT NULL REFERENCES users_praylist(id) ON DELETE CASCADE
+            user_id INTEGER NOT NULL REFERENCES users_praylist(id) ON DELETE CASCADE,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
             )
             `)
         console.log('Tabela list criada ou já existente')
@@ -33,6 +34,20 @@ async function initializeListDB() {
 }
 
 initializeListDB();
+
+app.get('/list', authenticateToken, async (req, res) => {
+    const userId = req.user.id;
+
+    try {
+        const SQL = await pool.query(
+            `SELECT * FROM list_praylist WHERE user_id = $1 ORDER BY created_at DESC`,
+            [userId]
+        );
+        res.json(SQL.rows);
+    } catch (error) {
+        res.status(500).json({ error: 'Erro ao buscar orações' });
+    }
+})
 
 app.post('/list', authenticateToken, async (req, res) => {
     const { task, completed } = req.body;
@@ -45,36 +60,22 @@ app.post('/list', authenticateToken, async (req, res) => {
         );
         
         if (taskCheck.rows.length > 0) {
-            console.log('Erro: A tarefa já existe');
-            return res.status(400).json({ error: 'Essa tarefa já existe na lista' })
+            console.log('Erro: A oração já existe');
+            return res.status(400).json({ error: 'Essa oração já existe na lista' })
         } 
 
         const SQL = await pool.query(
             `INSERT INTO list_praylist (task, completed, user_id)
             VALUES ($1, $2, $3)
-            RETURNING id`,
+            RETURNING *`,
             [task, completed, userId]
         )
-        res.json({ id: SQL.rows[0].id });
+        res.json( SQL.rows[0] );
 
-        console.log('Tarefa inserida com sucesso!');
+        console.log('Oração inserida com sucesso!');
     } catch (error) {
         console.log(error);
-        res.status(500).json({ error: 'Erro ao criar tarefa' });
-    }
-})
-
-app.get('/list', authenticateToken, async (req, res) => {
-    const userId = req.user.id;
-
-    try {
-        const SQL = await pool.query(
-            `SELECT * FROM list_praylist WHERE user_id = $1`,
-            [userId]
-        );
-        res.json(SQL.rows);
-    } catch (error) {
-        res.status(500).json({ error: 'Erro ao buscar tarefas' });
+        res.status(500).json({ error: 'Erro ao criar oração' });
     }
 })
 
@@ -84,15 +85,27 @@ app.put('/list/:id', authenticateToken, async (req, res) => {
     const userId = req.user.id;
 
     try {
+
+        const editTaskCheck = await pool.query(
+            `SELECT * FROM list_praylist WHERE task = $1 AND user_id = $2 AND id != $3`,
+            [task, userId, id]
+        );
+        
+        if (editTaskCheck.rows.length > 0) {
+            console.log('Erro ao editar oração: A oração já existe');
+            return res.status(400).json({ error: 'Essa oração já existe na lista' })
+        } 
+
         await pool.query(
             `UPDATE list_praylist SET task = $1, completed = $2 WHERE id = $3 AND user_id = $4`,
             [task, completed, id, userId]
         );
-        console.log('Tarefa atualizada com sucesso!');
-        res.json({ message: 'Tarefa atualizada com sucesso!' });
+
+        console.log('Oração atualizada com sucesso!');
+        res.json({ message: 'Oração atualizada com sucesso!' });
     } catch (error) {
-        console.log('Erro ao atualizar tarefa:', error);
-        res.status(500).json({ error: 'Erro ao atualizar tarefa' });
+        console.log('Erro ao atualizar oração:', error);
+        res.status(500).json({ error: 'Erro ao atualizar oração' });
     }
 })
 
@@ -106,9 +119,9 @@ app.delete('/list/:id', authenticateToken, async (req, res) => {
             [id, userId]
         );
 
-        res.json({ message: 'Tarefa excluída com sucesso!' });
+        res.json({ message: 'Oração excluída com sucesso!' });
     } catch (error) {
-        res.status(500).json({ error: 'Erro ao excluir tarefa' });
+        res.status(500).json({ error: 'Erro ao excluir oração' });
     }
 })
 

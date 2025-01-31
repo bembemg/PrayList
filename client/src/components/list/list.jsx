@@ -84,9 +84,7 @@ function List() {
                     completed: false,
                 });
 
-                setPrays([...prays, { 
-                    id: response.data.id, task: pray, completed: false
-                }]);
+                setPrays(prevPrays => [response.data, ...prevPrays]);
             }
             setPray('');
             setEdit(null);
@@ -128,9 +126,17 @@ function List() {
 
     // Editar oração
     const editPray = (id, name) => {
-        setPray(name);
-        setEdit(id);
-        showModal();
+        try {
+            setPray(name);
+            setEdit(id);
+            showModal();
+        } catch (err) {
+            if (err.response && err.response.data && err.response.data.error) {
+                setError(err.response.data.error);
+            } else {
+                setError('Erro ao salvar oração. Tente novamente.');
+            }
+        }
     }
 
     return (
