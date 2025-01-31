@@ -6,7 +6,7 @@ import DarkModeToggle from '../darkMode.jsx';
 
 import { FaEdit } from "react-icons/fa";
 import { TiDelete } from "react-icons/ti";
-import { MdCheckBoxOutlineBlank, MdCheckBox, MdCheck } from "react-icons/md";
+import { MdCheckBoxOutlineBlank, MdCheckBox, MdErrorOutline } from "react-icons/md";
 import { IoMdClose } from "react-icons/io";
 
 function List() {
@@ -53,6 +53,16 @@ function List() {
         }
     }, [navigate]);
 
+    useEffect(() => {
+        if (error) {
+            const timer = setTimeout(() => {
+                setError('');
+            }, 5000);
+
+            return () => clearTimeout(timer);
+        }
+    }, [error]);
+
     // Adicionar oração
     const addPray = async () => {
         if (pray.trim() === '') {
@@ -77,13 +87,13 @@ function List() {
                 setPrays([...prays, { 
                     id: response.data.id, task: pray, completed: false
                 }]);
-            } 
+            }
             setPray('');
             setEdit(null);
             closeModal();
         } catch (err) {
-            if (err.response && err.response.data && err.response.data.err) {
-                setError(err.response.data.err);
+            if (err.response && err.response.data && err.response.data.error) {
+                setError(err.response.data.error);
             } else {
                 setError('Erro ao salvar oração. Tente novamente.');
             }
@@ -186,9 +196,9 @@ function List() {
                 </button>
             </section>
 
-            <dialog ref={modal} className={`rounded-2xl p-0 bg-white dark:bg-zinc-800 shadow-xl origin-top-left transition-all duration-300 ease-in-out ${isClosing ? 'animate-closeDialog' : 'animate-openDialog'}`}>
+            <dialog ref={modal} className={`rounded-2xl p-0 bg-white dark:bg-zinc-800 shadow-xl origin-top-left transition-all duration-300 ease-in-out forwards ${isClosing ? 'animate-closeDialog' : 'animate-openDialog'} ${error ? 'h-80' : 'h-[16rem]'} scrollbar-none`}>
                 <div className="p-6 w-[450px]">
-                    <div className="flex items-center justify-between mb-6">
+                    <div className="flex items-center justify-between mb-4">
                         <h2 className="font-montserrat font-bold text-2xl text-gray-800 dark:text-100">
                             {edit !== null ? 'Editar Oração' : 'Adicionar Oração'}
                         </h2>
@@ -196,8 +206,13 @@ function List() {
                             <IoMdClose className="text-red-600 dark:text-red-400 text-xl transition-all duration-300 ease-in-out" />
                         </button>
                     </div>
-
-                    <div className="space-y-4">
+                    { error && (
+                        <div className="text-center flex mb-1 items-center gap-2 bg-red-100 text-red-600 p-3 rounded-lg border border-red-200 animate-[slideDown_5s_ease-in-out]" role="alert">
+                            <MdErrorOutline className="text-xl flex-shrink-0"/>
+                            <p className="font-montserrat text-sm">{error}</p>
+                        </div>
+                    )}
+                    <div className={`space-y-6 ${error ? 'animate-contentSlideDown' : ''}`}>
                         <div>
                             <label className="font-montserrat font-medium text-gray-800 dark:text-100 block mb-2">
                                 Oração

@@ -32,10 +32,10 @@ export default {
         '100%': { transform: 'translateY(-10px)', opacity: -1 },
       },
       contentSlideDown: {
-        '0%': { transform: 'translateY(-70px)' },
+        '0%': { transform: 'translateY(-50px)' },
         '10%': { transform: 'translateY(10px)', },
         '90%': { transform: 'translateY(10px)', },
-        '100%': { transform: 'translateY(-70px)' },
+        '100%': { transform: 'translateY(-50px)' },
       },
       openDialog: {
         '0%': { transform: 'scale(0) translate(-50%, -50%)', opacity: 0, top: '50%', left: '50%', },
@@ -47,12 +47,19 @@ export default {
         '50%': { transform: 'scale(1.2) translate(-50%, -50%)', opacity: 1, top: '50%', left: '50%' },
         '100%': { transform: 'scale(0) translate(-50%, -50%)', opacity: 0, top: '50%', left: '50%' }
       },
+      dialogDown: {
+        '0%': { transform: 'height(50%)' },
+        '10%': { transform: 'height(50%)' },
+        '90%': { transform: 'height(100%)' },
+        '100%': { transform: 'height(100%)' },
+      },
     },
     animation: {
       slideDown: 'slideDown 5s ease-in-out forwards',
       contentSlideDown: 'contentSlideDown 5s ease-in-out forwards',
       openDialog: 'openDialog .5s ease-in-out forwards',
       closeDialog: 'closeDialog .5s ease-in-out forwards',
+      dialogDown: 'dialogDown 5s ease-in-out forwards',
     },
   },
   plugins: [

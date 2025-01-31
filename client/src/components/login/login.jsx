@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 import { useNavigate } from 'react-router-dom';
 import { mainAPI } from '../../services/api.js';
-import { MdError, MdErrorOutline } from "react-icons/md";
+import { MdErrorOutline } from "react-icons/md";
 import DarkModeToggle from '../darkMode.jsx';
 
 function Login() {
@@ -81,7 +81,7 @@ function Login() {
                     <h1 className="font-montserrat font-bold text-3xl text-gray-800 dark:text-white mb-8">Login</h1>
 
                     {error && (
-                        <div className="text-center mb-6 flex items-center gap-2 bg-red-100 text-red-600 p-3 rounded-lg border border-red-200 animate-[slideDown_5s_ease-in-out]" role="alert">
+                        <div className="text-center mb-1 flex items-center gap-2 bg-red-100 text-red-600 p-3 rounded-lg border border-red-200 animate-[slideDown_5s_ease-in-out]" role="alert">
                             <MdErrorOutline className="text-xl flex-shrink-0"/>
                             <p className="font-montserrat text-sm">{error}</p>
                         </div>

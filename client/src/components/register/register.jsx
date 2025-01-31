@@ -83,7 +83,7 @@ function Register() {
                     </h1>
                     
                     {error && (
-                        <div className="text-center mb-6 flex items-center gap-2 bg-red-100 text-red-600 p-3 rounded-lg border border-red-200 animate-[slideDown_5s_ease-in-out]" role="alert">
+                        <div className="text-center mb-1 flex items-center gap-2 bg-red-100 text-red-600 p-3 rounded-lg border border-red-200 animate-[slideDown_5s_ease-in-out]" role="alert">
                             <MdErrorOutline className="text-xl flex-shrink-0"/>
                             <p className="font-montserrat text-sm">{error}</p>
                         </div>

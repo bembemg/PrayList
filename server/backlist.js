@@ -43,9 +43,11 @@ app.post('/list', authenticateToken, async (req, res) => {
             `SELECT * FROM list_praylist WHERE task = $1 AND user_id = $2`,
             [task, userId]
         );
+        
         if (taskCheck.rows.length > 0) {
-            return res.status(400).json({ error: 'Essa tarefa já existe na lista.' });
-        }
+            console.log('Erro: A tarefa já existe');
+            return res.status(400).json({ error: 'Essa tarefa já existe na lista' })
+        } 
 
         const SQL = await pool.query(
             `INSERT INTO list_praylist (task, completed, user_id)
