@@ -114,5 +114,5 @@ app.get('/health', (req, res) => {
 const PORT_INDEX = process.env.PORT_INDEX || 3001;
 
 app.listen(PORT_INDEX, '0.0.0.0', () => {
-    console.log(`Servidor rodando na porta ${PORT}`);
+    console.log(`Servidor rodando na porta ${PORT_INDEX}`);
 });

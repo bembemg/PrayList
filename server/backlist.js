@@ -149,5 +149,5 @@ app.get('/health', (req, res) => {
 const PORT_LIST = process.env.PORT_LIST || 3002;
 
 app.listen(PORT_LIST, '0.0.0.0', () => {
-    console.log(`Servidor rodando na porta ${PORT}`);
+    console.log(`Servidor rodando na porta ${PORT_LIST}`);
 });
