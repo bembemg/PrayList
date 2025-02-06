@@ -95,12 +95,6 @@ PrayList é uma aplicação web fullstack para gerenciamento de lista de oraçõ
 
 ## 📋 Próximas Melhorias
 - Recuperação de senha
-- Validações mais robustas
-- Testes unitários
-- Responsividade mobile
-
-## ⚠️ Observação
-Este projeto está em andamento. O frontend ainda não está concluído e, no momento, conta apenas com botões básicos para as funcionalidades. Em breve, novas funcionalidades serão adicionadas e o frontend aprimorado.
 
 ## 📞 Contato
 Gabriel B. - gabrielbembemc@gmail.com
