@@ -3,6 +3,7 @@ require('dotenv').config();
 const jwt = require('jsonwebtoken');
 const express = require('express');
 const app = express();
+const fs = require('fs');
 const { Pool } = require('pg');
 const cors = require('cors');
 const bodyParser = require('body-parser');
@@ -14,7 +15,11 @@ app.use(express.json());
 app.use(bodyParser.json());
 
 const pool = new Pool({
-    connectionString: process.env.DATABASE_URL
+    connectionString: process.env.DATABASE_URL,
+    ssl: {
+        rejectUnauthorized: true,
+        ca: fs.readFileSync("C:\Users\gabri\Documents\certificado-ca\ca-certificate.crt").toString()
+    }
 });
 
 async function initializeDB() {
