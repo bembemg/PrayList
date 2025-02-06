@@ -3,12 +3,12 @@ require('dotenv').config();
 const jwt = require('jsonwebtoken');
 const express = require('express');
 const app = express();
-const fs = require('fs');
 const { Pool } = require('pg');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const { authenticateToken } = require('./middleware/auth.js');
 const SECRET_KEY = process.env.JWT_SECRET;
+const caCert = process.env.CA_CERT ? process.env.CA_CERT.replace(/\\n/g, '\n') : null;
 
 app.use(cors());
 app.use(express.json());
@@ -18,7 +18,7 @@ const pool = new Pool({
     connectionString: process.env.DATABASE_URL,
     ssl: {
         rejectUnauthorized: true,
-        ca: fs.readFileSync("C:\Users\gabri\Documents\certificado-ca\ca-certificate.crt").toString()
+        ca: caCert
     }
 });
 
