@@ -142,6 +142,12 @@ schedule.scheduleJob('0 0 * * *', async () => {
     }
 })
 
-app.listen(3002, '0.0.0.0', () => {
-    console.log('Servidor rodando na porta 3002');
+app.get('/health', (req, res) => {
+    res.status(200).send('OK');
+});
+
+const PORT_LIST = process.env.PORT_LIST || 3002;
+
+app.listen(PORT_LIST, '0.0.0.0', () => {
+    console.log(`Servidor rodando na porta ${PORT_LIST}`);
 });
